@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Report SEO — HostessWing — Agosto 2026</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<style>
+  :root {
+    --violet:#9D4EDD; --violet-light:#F3E8FF; --violet-mid:#C084FC; --violet-dark:#6B21A8;
+    --magenta:#E91E8C; --magenta-light:#FCE7F3; --magenta-dark:#9D174D;
+    --text:#1a1a1a; --muted:#6b7280; --border:#e5e7eb; --bg:#f9fafb; --white:#ffffff;
+    --green:#16a34a; --red:#dc2626;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);font-size:15px;line-height:1.6;}
+  .page{max-width:980px;margin:0 auto;padding:40px 24px 80px;}
+
+  /* HEADER */
+  .header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:36px;padding-bottom:24px;border-bottom:3px solid;}
+  .header{border-image:linear-gradient(90deg,var(--violet),var(--magenta)) 1;}
+  .logo-bar{display:flex;align-items:center;gap:8px;margin-bottom:6px;}
+  .logo-dot{width:9px;height:9px;border-radius:50%;background:linear-gradient(135deg,var(--violet),var(--magenta));}
+  .logo-text{font-size:11px;font-weight:700;letter-spacing:0.1em;color:var(--violet);text-transform:uppercase;}
+  .header h1{font-size:26px;font-weight:700;line-height:1.2;}
+  .header h1 span{background:linear-gradient(90deg,var(--violet),var(--magenta));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+  .header-meta{font-size:13px;color:var(--muted);margin-top:5px;}
+  .header-right{text-align:right;}
+  .pl{font-size:11px;font-weight:700;letter-spacing:0.06em;color:var(--muted);text-transform:uppercase;}
+  .pv{font-size:13px;font-weight:600;color:var(--text);margin-top:2px;}
+
+  /* KPI */
+  .kpi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px;}
+  .kpi{background:var(--white);border:1px solid var(--border);border-radius:10px;padding:16px 15px 14px;position:relative;overflow:hidden;}
+  .kpi.hi::after{content:'';position:absolute;top:0;left:0;width:100%;height:3px;background:linear-gradient(90deg,var(--violet),var(--magenta));}
+  .kpi.hi{border-color:var(--violet);}
+  .kpi.mg::after{content:'';position:absolute;top:0;left:0;width:100%;height:3px;background:var(--magenta);}
+  .kpi.mg{border-color:var(--magenta);}
+  .kl{font-size:10px;font-weight:700;letter-spacing:0.07em;color:var(--muted);text-transform:uppercase;margin-bottom:6px;}
+  .kv{font-size:24px;font-weight:700;line-height:1;}
+  .kpi.hi .kv{background:linear-gradient(90deg,var(--violet),var(--magenta));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+  .kpi.mg .kv{color:var(--magenta);}
+  .ks{font-size:11px;color:var(--muted);margin-top:4px;}
+  .tu{font-size:11px;font-weight:700;color:var(--green);margin-top:4px;}
+  .td{font-size:11px;font-weight:700;color:var(--red);margin-top:4px;}
+  .tn{font-size:11px;font-weight:600;color:var(--muted);margin-top:4px;}
+
+  /* NOTE BOX */
+  .note-box{border-left:3px solid var(--magenta);background:var(--magenta-light);border-radius:0 8px 8px 0;padding:12px 16px;margin-bottom:36px;font-size:13px;color:var(--magenta-dark);line-height:1.6;}
+  .note-box strong{font-weight:700;}
+  .note-box p + p{margin-top:8px;}
+
+  /* SECTIONS */
+  .section{margin-bottom:40px;}
+  .sh{display:flex;align-items:center;gap:10px;margin-bottom:16px;}
+  .sn{width:23px;height:23px;border-radius:50%;background:linear-gradient(135deg,var(--violet),var(--magenta));color:#fff;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .st{font-size:15px;font-weight:700;}
+  .ss{font-size:12px;color:var(--muted);margin-left:auto;}
+
+  /* CALLOUT */
+  .callout{border-left:3px solid var(--violet);background:var(--violet-light);border-radius:0 8px 8px 0;padding:13px 16px;margin-bottom:16px;font-size:13px;color:var(--violet-dark);line-height:1.6;}
+  .callout.mg{border-color:var(--magenta);background:var(--magenta-light);color:var(--magenta-dark);}
+  .callout strong{font-weight:700;}
+  .callout p + p{margin-top:8px;}
+
+  /* CHART */
+  .chart-card{background:var(--white);border:1px solid var(--border);border-radius:10px;padding:22px;}
+  .chart-wrap{position:relative;width:100%;height:280px;}
+  .cleg{display:flex;gap:20px;margin-top:14px;font-size:12px;color:var(--muted);flex-wrap:wrap;}
+  .li{display:flex;align-items:center;gap:6px;}
+  .ld{width:20px;height:3px;border-radius:2px;display:inline-block;}
+
+  /* TABLES */
+  .table-card{background:var(--white);border:1px solid var(--border);border-radius:10px;overflow:hidden;}
+  table{width:100%;border-collapse:collapse;table-layout:fixed;}
+  thead tr{background:var(--violet-light);}
+  thead th{font-size:10px;font-weight:700;letter-spacing:0.07em;color:var(--violet-dark);text-transform:uppercase;padding:11px 13px;text-align:left;}
+  thead th.r{text-align:right;}
+  tbody tr{border-top:1px solid var(--border);}
+  tbody tr:hover{background:#fdf4ff;}
+  td{padding:10px 13px;font-size:13px;vertical-align:middle;}
+  td.r{text-align:right;color:var(--muted);}
+  .pn{font-weight:600;color:var(--violet-dark);display:block;}
+  .pu{font-size:11px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .br{display:flex;align-items:center;gap:7px;}
+  .bb{flex:1;height:6px;background:var(--violet-light);border-radius:3px;overflow:hidden;}
+  .bf{height:100%;background:linear-gradient(90deg,var(--violet),var(--magenta));border-radius:3px;}
+  .bn{font-size:12px;font-weight:600;min-width:36px;text-align:right;}
+
+  /* BADGES */
+  .badge{display:inline-flex;align-items:center;justify-content:center;min-width:34px;height:21px;border-radius:4px;font-size:11px;font-weight:700;padding:0 4px;}
+  .b1{background:#fef9c3;color:#854d0e;}
+  .b2{background:#dcfce7;color:#166534;}
+  .b3{background:var(--violet-light);color:var(--violet-dark);}
+  .bx{background:#f3f4f6;color:#4b5563;}
+  .delta-up{background:#dcfce7;color:#166534;border-radius:4px;padding:2px 6px;font-size:11px;font-weight:700;}
+  .delta-down{background:#fee2e2;color:#991b1b;border-radius:4px;padding:2px 6px;font-size:11px;font-weight:700;}
+  .delta-flat{background:#f3f4f6;color:#6b7280;border-radius:4px;padding:2px 6px;font-size:11px;font-weight:700;}
+  .delta-new{background:#fef9c3;color:#854d0e;border-radius:4px;padding:2px 6px;font-size:11px;font-weight:700;}
+  .ch{color:var(--green);font-weight:700;}
+  .cm{color:var(--violet);font-weight:600;}
+  .cl{color:var(--muted);}
+
+  /* INSIGHT */
+  .insight{background:var(--magenta-light);border:1px solid #fbcfe8;border-radius:8px;padding:14px 16px;font-size:13px;color:var(--magenta-dark);line-height:1.6;}
+  .insight strong{font-weight:700;}
+  .insight p + p{margin-top:8px;}
+
+  /* GSC NOTE */
+  .gsc-note{background:#f8fafc;border:1px solid var(--border);border-radius:6px;padding:10px 14px;font-size:12px;color:var(--muted);margin-bottom:14px;line-height:1.5;}
+  .gsc-note strong{color:var(--text);}
+
+  /* COMMENT CARDS */
+  .comment-grid{display:flex;flex-direction:column;gap:10px;}
+  .comment-card{background:var(--white);border:1px solid var(--border);border-radius:10px;overflow:hidden;}
+  .cc-head{display:flex;align-items:center;gap:10px;padding:10px 15px;border-bottom:1px solid var(--border);}
+  .cc-name{font-weight:600;color:var(--violet-dark);font-size:13px;}
+  .cc-url{font-size:11px;color:var(--muted);margin-left:2px;}
+  .pill{margin-left:auto;font-size:10px;font-weight:700;padding:3px 9px;border-radius:20px;white-space:nowrap;}
+  .pill-up{background:#dcfce7;color:#166534;}
+  .pill-down{background:#fee2e2;color:#991b1b;}
+  .pill-flat{background:#f3f4f6;color:#6b7280;}
+  .pill-warn{background:#fef3c7;color:#92400e;}
+  .cc-body{padding:12px 15px;font-size:13px;color:var(--text);line-height:1.55;}
+
+  /* FOOTER */
+  .footer{margin-top:56px;padding-top:18px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;}
+  .fb{font-size:12px;font-weight:700;background:linear-gradient(90deg,var(--violet),var(--magenta));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+  .fn{font-size:11px;color:var(--muted);}
+
+  @media(max-width:700px){
+    .kpi-grid{grid-template-columns:repeat(2,1fr);}
+    .header{flex-direction:column;gap:10px;}
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- HEADER -->
+<div class="header">
+  <div>
+    <div class="logo-bar"><div class="logo-dot"></div><span class="logo-text">Report SEO</span></div>
+    <h1><span>HostessWing</span></h1>
+    <div class="header-meta">Blog non-branded · Traffico organico</div>
+  </div>
+  <div class="header-right">
+    <div class="pl">Periodo analisi</div>
+    <div class="pv">26 lug – 22 ago 2026</div>
+    <div class="pl" style="margin-top:10px;">Grafico andamento</div>
+    <div class="pv">Ago 2025 – Ago 2026</div>
+  </div>
+</div>
+
+<!-- KPI STRIP -->
+<div class="kpi-grid">
+  <div class="kpi hi"><div class="kl">Click blog (28gg)</div><div class="kv">381</div><div class="td">▼ -4% vs periodo prec.</div></div>
+  <div class="kpi mg"><div class="kl">Homepage branded</div><div class="kv">23.2K</div><div class="tu">▲ +6% vs periodo prec.</div></div>
+</div>
+
+<div class="note-box">
+  <p><strong>SEO title homepage aggiornato l'1 luglio 2026</strong> — CTR ancora in crescita (45,45% vs 44,51% del periodo precedente), ora su un confronto quasi interamente post-modifica.</p>
+  <p><strong>Segnale più forte del mese: il CTR aggregato su tutte le query branded è salito dal 75,21% all'87,78%</strong> (+12,6 punti). Nello stesso periodo le impressioni branded sono calate del 9% a fronte di click in crescita (+6%) — la lettura più probabile è che ci sia meno pressione Ads sui termini branded, con l'organico che copre una quota maggiore delle ricerche dirette al brand.</p>
+</div>
+
+<!-- SECTION 1 — 12 MESI -->
+<div class="section">
+  <div class="sh"><div class="sn">1</div><div class="st">Andamento traffico — 12 mesi (sito intero)</div><div class="ss">Click giornalieri · ago 2025 – ago 2026</div></div>
+  <div class="callout">Dopo il minimo di maggio 2026 (~560 click/giorno, effetto cannibalizzazione Ads sui branded già discusso), il sito ha recuperato con decisione: <strong>giugno ~640/giorno, luglio ~830/giorno</strong> con un picco di <strong>1.104 click il 23 luglio</strong> — il valore giornaliero più alto dei 12 mesi, superiore anche al picco di marzo (905/giorno di media). Agosto tiene bene (~825/giorno di media) nonostante il consueto rallentamento estivo delle ricerche in Italia.</div>
+  <div class="chart-card">
+    <div class="chart-wrap"><canvas id="mainChart"></canvas></div>
+    <div class="cleg">
+      <span class="li"><span class="ld" style="background:#d1d5db;height:8px;border-radius:2px;"></span>Ago–Set 2025</span>
+      <span class="li"><span class="ld" style="background:#C084FC;"></span>Ott 2025–Gen 2026</span>
+      <span class="li"><span class="ld" style="background:#9D4EDD;"></span>Feb–Mag 2026 (picco e calo)</span>
+      <span class="li"><span class="ld" style="background:#E91E8C;"></span>Giu–Ago 2026 (recupero)</span>
+      <span class="li"><span class="ld" style="background:#6B21A8;"></span>Media 7gg</span>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 2 — KEYWORD NON-BRANDED -->
+<div class="section">
+  <div class="sh"><div class="sn">2</div><div class="st">Keyword non-branded principali</div><div class="ss">Ultimi 28 giorni · Escluse varianti branded</div></div>
+
+  <div class="insight" style="margin-bottom:16px;">
+    <p><strong>Wing woman / wingwoman:</strong> cluster in crescita su quasi tutte le varianti. La query "wing woman" da sola è raddoppiata (+104%, da 68 a 139 click), "hostess wing woman" +400%, "wingswoman" +600%. Solo "wing women" (-37%) e "wing girl" (-47%) calano, ma restano varianti minori. Nel complesso il cluster fa +31% (240→314 click).</p>
+    <p><strong>Escort e Accompagnatrici:</strong> entrambi i cluster in forte crescita — escort +65% (57→94 click), accompagnatrici +87% (23→43 click) — pur senza pagine dedicate ottimizzabili per questi termini. Sono click che il blog intercetta "gratis" grazie alla semantica generale dei contenuti.</p>
+  </div>
+
+  <div class="gsc-note"><strong>Nota GSC:</strong> I dati tendono a essere imprecisi su keyword a basso volume — molte query non vengono nemmeno riportate. Più che il numero assoluto di click, conta la visibilità organica che si sta costruendo su questi termini.</div>
+
+  <div class="table-card">
+    <table>
+      <thead><tr>
+        <th style="width:36%"># Keyword</th>
+        <th class="r" style="width:16%">Click</th>
+        <th class="r" style="width:15%">Impressioni</th>
+        <th class="r" style="width:12%">CTR</th>
+        <th class="r" style="width:15%">Posizione</th>
+      </tr></thead>
+      <tbody id="kw-body"></tbody>
+    </table>
+  </div>
+</div>
+
+<!-- SECTION 3 — PAGINE NON-BRANDED -->
+<div class="section">
+  <div class="sh"><div class="sn">3</div><div class="st">Pagine blog non-branded — confronto 28 giorni</div><div class="ss">Top 10 · 26 lug–22 ago 2026 vs periodo precedente</div></div>
+  <div class="callout">Escluse homepage, login, pagine /en/, blog root e URL branded/utm. Focus sul traffico organico reale acquisito attraverso il blog.</div>
+  <div class="table-card">
+    <table>
+      <thead><tr>
+        <th style="width:33%"># Pagina</th>
+        <th style="width:22%">Click (28gg)</th>
+        <th class="r" style="width:10%">Δ</th>
+        <th class="r" style="width:15%">Impressioni</th>
+        <th class="r" style="width:10%">CTR</th>
+        <th class="r" style="width:10%">Posiz.</th>
+      </tr></thead>
+      <tbody id="pages-body"></tbody>
+    </table>
+  </div>
+</div>
+
+
+<!-- FOOTER -->
+<div class="footer">
+  <div class="fb">hostesswing.com</div>
+  <div class="fn">Fonte: Google Search Console · Generato il 24 agosto 2026</div>
+</div>
+
+</div>
+
+<script>
+// ─── PAGES DATA (Top 15 non-branded) ───
+const pages = [
+  {name:"Hostess per Cene",url:"/hostess-cene/",lc:39,pc:42,impr:12898,ctr:"0.3%",pos:1.59,ppos:1.60,
+   comment:"Lieve flessione (-7% click) coerente con il rallentamento stagionale del cluster, posizione sostanzialmente invariata (1.59).", pill:"flat"},
+  {name:"Chi Siamo",url:"/chi-siamo/",lc:35,pc:57,impr:17622,ctr:"0.2%",pos:2.64,ppos:2.25,
+   comment:"Il calo più marcato tra le pagine ad alto traffico (-39% click, -26% impressioni), in linea col rallentamento estivo generale — posizione solo lievemente peggiorata.", pill:"down"},
+  {name:"Come Funziona HostessWing",url:"/come-funziona-hostesswing/",lc:35,pc:18,impr:11042,ctr:"0.32%",pos:1.38,ppos:1.50,
+   comment:"Migliore performance del mese: click quasi raddoppiati (+94%) con posizione ulteriormente migliorata (1.38 da 1.50) e impressioni in crescita (+9%).", pill:"up"},
+  {name:"Dove trovare uomini ricchi",url:"/dove-trovare-uomini-ricchi-guida-pratica/",lc:26,pc:14,impr:752,ctr:"3.46%",pos:9.89,ppos:9.09,
+   comment:"Click quasi raddoppiati (+86%) grazie a un CTR quasi doppio (3.46% da 1.83%) a parità di impressioni — title e snippet stanno funzionando meglio.", pill:"up"},
+  {name:"Prezzi Crediti",url:"/prezzi-crediti/",lc:21,pc:19,impr:4235,ctr:"0.5%",pos:1.70,ppos:1.71,
+   comment:"Crescita solida (+11%) con CTR e posizione stabili — pagina di conversione affidabile.", pill:"up"},
+  {name:"Wing Woman",url:"/wing-woman/",lc:16,pc:28,impr:6107,ctr:"0.26%",pos:2.04,ppos:1.47,
+   comment:"Il calo sulla pagina blog (-43% click) non preoccupa: a livello di sito la query \"wing woman\" è raddoppiata (+104%, da 68 a 139 click) — il traffico si sta spostando sulla homepage, il posizionamento del brand sul termine resta fortissimo.", pill:"flat"},
+  {name:"Siti Incontri Seri",url:"/siti-incontri-seri/",lc:16,pc:9,impr:236,ctr:"6.78%",pos:9.92,ppos:8.08,
+   comment:"Click in forte crescita (+78%) grazie a un CTR quasi triplicato (6.78% da 2.56%) — volumi ancora piccoli ma trend molto positivo.", pill:"up"},
+  {name:"Agenzia Hostess Roma",url:"/agenzia-hostess-roma/",lc:15,pc:15,impr:1654,ctr:"0.91%",pos:10.68,ppos:8.82,
+   comment:"Click stabili nonostante impressioni dimezzate (-52%) — la pagina mantiene la stessa domanda intercettata su una base di visibilità più piccola.", pill:"flat"},
+  {name:"Wing Hostess — cosa fa",url:"/wing-hostess-cosa-fa/",lc:11,pc:9,impr:2118,ctr:"0.52%",pos:3.16,ppos:2.51,
+   comment:"Click in crescita (+22%) nonostante impressioni dimezzate — buon segnale di efficienza su un volume di traffico più basso.", pill:"up"},
+  {name:"Hostess Cubista Discoteca",url:"/hostess-cubista-discoteca/",lc:7,pc:5,impr:1227,ctr:"0.57%",pos:7.22,ppos:7.20,
+   comment:"Click in crescita (+40%) su impressioni e posizione sostanzialmente stabili.", pill:"up"},
+];
+
+const maxC = pages[0].lc;
+const pb = document.getElementById('pages-body');
+pages.forEach((p,i) => {
+  let delta, dbadge;
+  if (p.pc === 0) { delta = 'NEW'; dbadge = 'delta-new'; }
+  else {
+    const d = Math.round((p.lc - p.pc) / p.pc * 100);
+    delta = (d > 0 ? '+' : '') + d + '%';
+    dbadge = d > 10 ? 'delta-up' : d < -10 ? 'delta-down' : 'delta-flat';
+  }
+  const pct = Math.round(p.lc / maxC * 100);
+  const pc = p.pos <= 1.5 ? 'b1' : p.pos <= 3 ? 'b2' : p.pos <= 5 ? 'b3' : 'bx';
+  const posDelta = p.ppos > 0 ? (p.pos < p.ppos ? `<span style="color:var(--green);font-size:10px;">▲</span>` : p.pos > p.ppos ? `<span style="color:var(--red);font-size:10px;">▼</span>` : '') : '';
+  const cn = parseFloat(p.ctr);
+  const cc = cn >= 5 ? 'ch' : cn >= 1 ? 'cm' : 'cl';
+
+  pb.innerHTML += `<tr>
+    <td><span style="font-size:10px;color:var(--muted);margin-right:5px;">${i+1}</span><span class="pn">${p.name}</span><span class="pu">blog.hostesswing.com${p.url}</span></td>
+    <td>
+      <div class="br"><div class="bb"><div class="bf" style="width:${pct}%"></div></div><span class="bn">${p.lc}</span></div>
+      <div style="font-size:10px;color:var(--muted);margin-top:2px;">da ${p.pc}</div>
+    </td>
+    <td class="r"><span class="${dbadge}">${delta}</span></td>
+    <td class="r">${p.impr.toLocaleString('it-IT')}</td>
+    <td class="r"><span class="${cc}">${p.ctr}</span></td>
+    <td class="r"><span class="badge ${pc}">${p.pos.toFixed(2)}</span>${posDelta}</td>
+  </tr>`;
+});
+
+// ─── KEYWORD DATA (non-branded, wostess escluso) ───
+const kws = [
+  {q:"wing woman",c:139,pc:68,i:313,ctr:"44.41%",p:3.66},
+  {q:"wingwoman",c:118,pc:118,i:429,ctr:"27.51%",p:3.60},
+  {q:"hostess wing woman",c:15,pc:3,i:30,ctr:"50.00%",p:4.77},
+  {q:"wing women",c:12,pc:19,i:32,ctr:"37.50%",p:4.00},
+  {q:"escort wing",c:12,pc:9,i:15,ctr:"80.00%",p:1.00},
+  {q:"accompagnatrici",c:11,pc:4,i:111,ctr:"9.91%",p:11.64},
+  {q:"wing girl",c:10,pc:19,i:38,ctr:"26.32%",p:3.08},
+  {q:"hostess accompagnatrici",c:7,pc:0,i:25,ctr:"28.00%",p:6.72},
+  {q:"wingswoman",c:7,pc:1,i:16,ctr:"43.75%",p:2.38},
+  {q:"escort pisa",c:6,pc:1,i:135,ctr:"4.44%",p:6.04},
+  {q:"sito accompagnatrici",c:6,pc:7,i:29,ctr:"20.69%",p:5.72},
+  {q:"wing girls",c:5,pc:4,i:8,ctr:"62.50%",p:1.12},
+  {q:"escort incontri",c:3,pc:0,i:69,ctr:"4.35%",p:7.97},
+  {q:"wingwomen",c:3,pc:1,i:68,ctr:"4.41%",p:13.10},
+  {q:"escort napoli",c:3,pc:0,i:32,ctr:"9.38%",p:5.34},
+  {q:"accompagnatrici per cene",c:3,pc:3,i:20,ctr:"15.00%",p:14.05},
+  {q:"sito hostess",c:3,pc:1,i:11,ctr:"27.27%",p:2.82},
+  {q:"wings girls",c:3,pc:2,i:9,ctr:"33.33%",p:4.56},
+  {q:"hostess per cene",c:2,pc:5,i:13,ctr:"15.38%",p:8.62},
+  {q:"wing woman milano",c:1,pc:5,i:6,ctr:"16.67%",p:9.50},
+];
+
+const kb = document.getElementById('kw-body');
+kws.forEach((q,i) => {
+  const pc = q.p <= 1.5 ? 'b1' : q.p <= 3 ? 'b2' : q.p <= 6 ? 'b3' : 'bx';
+  const cn = parseFloat(q.ctr);
+  const cc = cn >= 10 ? 'ch' : cn >= 2 ? 'cm' : 'cl';
+  kb.innerHTML += `<tr>
+    <td><span style="font-size:10px;color:var(--muted);margin-right:5px;">${i+1}</span><strong>${q.q}</strong></td>
+    <td class="r">
+      <div style="font-weight:600;">${q.c}</div>
+      <div style="font-size:10px;color:var(--muted);margin-top:2px;">da ${q.pc}</div>
+    </td>
+    <td class="r">${q.i.toLocaleString('it-IT')}</td>
+    <td class="r"><span class="${cc}">${q.ctr}</span></td>
+    <td class="r"><span class="badge ${pc}">${q.p.toFixed(2)}</span></td>
+  </tr>`;
+});
+
+// ─── 12-MONTH CHART ───
+const allClicks = [475, 425, 533, 500, 548, 460, 397, 438, 470, 554, 618, 614, 629, 549, 532, 552, 565, 663, 593, 560, 518, 452, 485, 585, 530, 575, 540, 494, 564, 578, 666, 677, 629, 594, 586, 518, 590, 631, 633, 554, 628, 543, 492, 617, 636, 610, 579, 556, 570, 471, 515, 734, 576, 707, 607, 521, 486, 585, 669, 613, 577, 570, 594, 577, 658, 697, 661, 593, 668, 598, 516, 696, 605, 682, 651, 733, 632, 552, 636, 644, 665, 629, 616, 646, 628, 710, 777, 810, 628, 682, 662, 631, 711, 716, 707, 636, 635, 622, 520, 619, 779, 800, 662, 662, 672, 592, 633, 697, 771, 700, 734, 715, 584, 750, 738, 745, 620, 742, 719, 684, 772, 698, 706, 549, 620, 667, 748, 744, 774, 645, 509, 534, 814, 728, 812, 807, 857, 890, 768, 848, 861, 867, 941, 948, 883, 879, 918, 888, 951, 912, 966, 914, 938, 957, 795, 891, 902, 895, 820, 896, 870, 778, 846, 994, 969, 845, 764, 799, 670, 729, 778, 820, 879, 830, 746, 604, 748, 937, 870, 880, 870, 815, 704, 814, 1092, 1113, 1016, 834, 831, 729, 897, 1021, 1066, 996, 899, 850, 711, 687, 978, 1098, 1074, 1038, 941, 814, 761, 955, 955, 887, 885, 868, 750, 840, 953, 1131, 979, 978, 858, 730, 749, 937, 769, 946, 871, 898, 849, 858, 976, 1162, 1100, 996, 1073, 781, 933, 1018, 922, 749, 782, 669, 621, 583, 676, 622, 627, 585, 612, 515, 585, 646, 533, 511, 494, 378, 439, 435, 621, 643, 614, 493, 622, 500, 579, 630, 602, 479, 605, 595, 547, 579, 695, 678, 557, 527, 535, 423, 528, 591, 611, 601, 654, 541, 474, 577, 607, 658, 736, 772, 697, 509, 644, 743, 728, 571, 505, 481, 508, 587, 659, 729, 684, 666, 582, 636, 628, 789, 664, 659, 691, 691, 518, 512, 655, 727, 551, 564, 575, 486, 551, 579, 609, 726, 766, 855, 719, 876, 970, 985, 901, 953, 973, 826, 942, 1005, 1055, 1075, 1104, 909, 810, 956, 985, 943, 895, 844, 742, 724, 785, 908, 830, 873, 847, 766, 796, 851, 855, 834, 764, 788, 753, 676, 839, 975, 922, 818, 871, 865, 808];
+
+function rollingAvg(data, w) {
+  return data.map((v,i) => {
+    const s = Math.max(0, i - w + 1);
+    const sl = data.slice(s, i+1);
+    return Math.round(sl.reduce((a,b) => a+b,0) / sl.length);
+  });
+}
+const avg7 = rollingAvg(allClicks, 7);
+
+// Phase boundaries (day index from 2025-08-23):
+// Ago-Set 2025: 0-38 | Ott 2025-Gen 2026: 39-161 | Feb-Mag 2026 (picco+calo): 162-281 | Giu-Ago 2026 (recupero): 282-364
+const phaseColors = allClicks.map((_,i) => {
+  if (i < 39) return 'rgba(209,213,219,0.85)';
+  if (i < 162) return 'rgba(192,132,252,0.85)';
+  if (i < 282) return 'rgba(157,78,221,0.85)';
+  return 'rgba(233,30,140,0.85)';
+});
+
+const monthNames = ['Ago 25','Set 25','Ott 25','Nov 25','Dic 25','Gen 26','Feb 26','Mar 26','Apr 26','Mag 26','Giu 26','Lug 26','Ago 26'];
+const monthStarts = [0,9,39,70,100,131,162,190,221,251,282,312,343];
+const labels = allClicks.map((_,i) => {
+  const idx = monthStarts.indexOf(i);
+  return idx >= 0 ? monthNames[idx] : '';
+});
+
+const ctx = document.getElementById('mainChart').getContext('2d');
+new Chart(ctx, {
+  type: 'bar',
+  data: {
+    labels,
+    datasets: [
+      {type:'bar', label:'Click giornalieri', data:allClicks, backgroundColor:phaseColors, borderWidth:0, barPercentage:0.9, categoryPercentage:0.95, order:2},
+      {type:'line', label:'Media 7gg', data:avg7, borderColor:'#6B21A8', borderWidth:2, pointRadius:0, tension:0.4, fill:false, order:1}
+    ]
+  },
+  options: {
+    responsive:true,
+    maintainAspectRatio:false,
+    interaction:{mode:'index',intersect:false},
+    plugins:{
+      legend:{display:false},
+      tooltip:{
+        backgroundColor:'#fff', borderColor:'#e5e7eb', borderWidth:1,
+        titleColor:'#1a1a1a', bodyColor:'#6b7280', padding:10,
+        callbacks:{
+          title: items => {
+            const i = items[0].dataIndex;
+            const mi = monthStarts.indexOf(i);
+            return mi >= 0 ? monthNames[mi] : `Giorno ${i+1}`;
+          },
+          label: c => {
+            if (c.dataset.type === 'line') return ` Media 7gg: ${c.parsed.y} click`;
+            return ` Giornalieri: ${c.parsed.y} click`;
+          }
+        }
+      }
+    },
+    scales:{
+      x:{
+        grid:{display:false},
+        ticks:{color:'#9ca3af', font:{size:10}, maxRotation:0, autoSkip:false,
+          callback:(val,idx) => labels[idx] || null},
+        border:{color:'#e5e7eb'}
+      },
+      y:{
+        min:0, max:1300,
+        grid:{color:'#f3f4f6', drawBorder:false},
+        ticks:{color:'#9ca3af', font:{size:11}, stepSize:200},
+        border:{display:false}
+      }
+    }
+  }
+});
+</script>
+</body>
+</html>
