@@ -223,11 +223,72 @@
   </div>
 </div>
 
+<!-- APPENDIX DIVIDER -->
+<div style="display:flex;align-items:center;gap:14px;margin:48px 0 28px;">
+  <div style="height:1px;flex:1;background:var(--border);"></div>
+  <div style="font-size:11px;font-weight:700;letter-spacing:0.12em;color:var(--muted);text-transform:uppercase;">Appendice · Google Analytics 4</div>
+  <div style="height:1px;flex:1;background:var(--border);"></div>
+</div>
+
+<!-- SECTION 4 — ACQUISIZIONE CANALI -->
+<div class="section">
+  <div class="sh"><div class="sn">4</div><div class="st">Acquisizione canali</div><div class="ss">Sessioni · Nuovi utenti · 26 lug–22 ago 2026 vs periodo prec.</div></div>
+
+  <div class="kpi-grid" style="margin-bottom:16px;">
+    <div class="kpi hi"><div class="kl">Sessioni totali</div><div class="kv">154,7K</div><div class="td">▼ -9,03% vs periodo prec.</div></div>
+    <div class="kpi"><div class="kl">Nuovi utenti</div><div class="kv">42,4K</div><div class="td">▼ -14,01% vs periodo prec.</div></div>
+    <div class="kpi mg"><div class="kl">Utenti di ritorno</div><div class="kv">5,6K</div><div class="td">▼ -15,74% vs periodo prec.</div></div>
+  </div>
+
+  <div class="callout">Il calo generale è dovuto alla <strong>diminuzione delle campagne paid, sia Social che Search</strong>: Paid Search -50,24% sessioni, Paid Social -28,37%. Al netto di questo taglio, i canali organici performano bene: <strong>Organic Search +13,65% sessioni, Organic Social +65,36%</strong>.</div>
+
+  <div class="insight" style="margin-bottom:16px;">
+    <strong>Canale emergente da monitorare:</strong> le sessioni da <strong>AI Assistant</strong> (ChatGPT, Perplexity e simili) sono triplicate, da 59 a 178 — volumi ancora piccoli ma il trend è netto e coerente con l'andamento generale del traffico da assistenti AI.
+  </div>
+
+  <div class="table-card">
+    <table>
+      <thead><tr>
+        <th style="width:20%">Canale</th>
+        <th style="width:22%">Sessioni</th>
+        <th style="width:20%">Nuovi utenti</th>
+        <th style="width:20%">Utenti totali</th>
+        <th class="r" style="width:18%">Sess./utente attivo</th>
+      </tr></thead>
+      <tbody id="channels-body"></tbody>
+    </table>
+  </div>
+</div>
+
+<!-- SECTION 5 — PARENTESI SPAGNA -->
+<div class="section">
+  <div class="sh"><div class="sn">5</div><div class="st">Parentesi: mercato Spagna</div><div class="ss">26 lug–22 ago 2026 vs periodo precedente</div></div>
+
+  <div class="kpi-grid" style="grid-template-columns:repeat(3,1fr);margin-bottom:12px;">
+    <div class="kpi hi"><div class="kl">Utenti attivi</div><div class="kv">11.933</div><div class="tu">▲ +31,9% vs periodo prec.</div></div>
+    <div class="kpi"><div class="kl">Nuovi utenti</div><div class="kv">11.334</div><div class="tu">▲ +29,5% vs periodo prec.</div></div>
+    <div class="kpi mg"><div class="kl">Utenti di ritorno</div><div class="kv">599</div><div class="tu">▲ +105,8% vs periodo prec.</div></div>
+  </div>
+  <div class="kpi-grid" style="grid-template-columns:repeat(3,1fr);margin-bottom:16px;">
+    <div class="kpi"><div class="kl">Sessioni con interazione</div><div class="kv">6.665</div><div class="tu">▲ +59,2% vs periodo prec.</div></div>
+    <div class="kpi"><div class="kl">Fatturato</div><div class="kv">1.005€</div><div class="tu">▲ +25,6% vs periodo prec.</div></div>
+    <div class="kpi"><div class="kl">Fatturato per utente</div><div class="kv">0,084€</div><div class="td">▼ -4,8% vs periodo prec.</div></div>
+  </div>
+
+  <div class="chart-card" style="margin-bottom:16px;">
+    <div class="chart-wrap" style="height:260px;"><canvas id="spainChart"></canvas></div>
+  </div>
+
+  <div class="insight">
+    <p>La Spagna continua a crescere su tutti i fronti: <strong>utenti attivi +31,9%</strong>, trainati soprattutto da un forte aumento delle <strong>sessioni con interazione (+59,2%)</strong> — il traffico non solo cresce in volume ma si impegna di più con il sito. Gli <strong>utenti di ritorno raddoppiano</strong> (291→599), un primo segnale di fidelizzazione su un mercato ancora giovane, dove il <strong>94,98% degli utenti resta comunque nuovo</strong>.</p>
+    <p>Il fatturato cresce in linea con gli utenti (+25,6%, da 800€ a 1.005€), ma il <strong>fatturato per utente scende leggermente (-4,8%)</strong> — la crescita in volume sta correndo un filo più veloce della monetizzazione per utente, normale in una fase di espansione ma da tenere d'occhio.</p>
+  </div>
+</div>
 
 <!-- FOOTER -->
 <div class="footer">
   <div class="fb">hostesswing.com</div>
-  <div class="fn">Fonte: Google Search Console · Generato il 24 agosto 2026</div>
+  <div class="fn">Fonte: Google Search Console e Google Analytics 4 · Generato il 24 agosto 2026</div>
 </div>
 
 </div>
@@ -285,6 +346,40 @@ pages.forEach((p,i) => {
     <td class="r"><span class="badge ${pc}">${p.pos.toFixed(2)}</span>${posDelta}</td>
   </tr>`;
 });
+
+// ─── CHANNELS DATA (GA4 Traffic Acquisition) ───
+const channels = [
+  {name:"Direct", s:71810, ps:75458, nu:8835, tu:11831, spau:6.42},
+  {name:"Organic Search", s:42272, ps:37194, nu:7416, tu:8715, spau:4.98},
+  {name:"Paid Social", s:22402, ps:31273, nu:18018, tu:19316, spau:1.22},
+  {name:"Paid Search", s:9247, ps:18589, nu:1700, tu:2156, spau:4.51},
+  {name:"Organic Social", s:7954, ps:4810, nu:5870, tu:6319, spau:1.31},
+  {name:"Referral", s:1085, ps:1447, nu:159, tu:227, spau:5.12},
+  {name:"Unassigned", s:510, ps:597, nu:20, tu:254, spau:2.02},
+  {name:"Display", s:200, ps:0, nu:183, tu:183, spau:1.09},
+  {name:"AI Assistant", s:178, ps:59, nu:26, tu:30, spau:5.93},
+  {name:"Paid Other", s:124, ps:78, nu:102, tu:104, spau:1.20},
+  {name:"Cross-network", s:74, ps:125, nu:34, tu:45, spau:1.80},
+];
+
+const chb = document.getElementById('channels-body');
+channels.forEach(c => {
+  let sd, sdbadge;
+  if (c.ps === 0) { sd = 'NEW'; sdbadge = 'delta-new'; }
+  else {
+    const d = Math.round((c.s - c.ps) / c.ps * 100);
+    sd = (d > 0 ? '+' : '') + d + '%';
+    sdbadge = d > 5 ? 'delta-up' : d < -5 ? 'delta-down' : 'delta-flat';
+  }
+  chb.innerHTML += `<tr>
+    <td><span class="pn">${c.name}</span></td>
+    <td>${c.s.toLocaleString('it-IT')} <span class="${sdbadge}">${sd}</span></td>
+    <td>${c.nu.toLocaleString('it-IT')}</td>
+    <td>${c.tu.toLocaleString('it-IT')}</td>
+    <td class="r">${c.spau.toFixed(2)}</td>
+  </tr>`;
+});
+
 
 // ─── KEYWORD DATA (non-branded, wostess escluso) ───
 const kws = [
@@ -400,6 +495,35 @@ new Chart(ctx, {
         ticks:{color:'#9ca3af', font:{size:11}, stepSize:200},
         border:{display:false}
       }
+    }
+  }
+});
+
+// ─── SPAIN CHART ───
+const spainCtx = document.getElementById('spainChart').getContext('2d');
+new Chart(spainCtx, {
+  type: 'bar',
+  data: {
+    labels: ['Utenti attivi', 'Nuovi utenti', 'Utenti di ritorno', 'Sessioni con interazione'],
+    datasets: [
+      {label:'Periodo precedente (28 giu–25 lug)', data:[9045, 8754, 291, 4186], backgroundColor:'rgba(192,132,252,0.55)', borderRadius:4, barPercentage:0.7, categoryPercentage:0.6},
+      {label:'Periodo attuale (26 lug–22 ago)', data:[11933, 11334, 599, 6665], backgroundColor:'rgba(233,30,140,0.85)', borderRadius:4, barPercentage:0.7, categoryPercentage:0.6}
+    ]
+  },
+  options:{
+    responsive:true,
+    maintainAspectRatio:false,
+    plugins:{
+      legend:{display:true, position:'bottom', labels:{color:'#6b7280', font:{size:11}, boxWidth:12, padding:16}},
+      tooltip:{
+        backgroundColor:'#fff', borderColor:'#e5e7eb', borderWidth:1,
+        titleColor:'#1a1a1a', bodyColor:'#6b7280', padding:10,
+        callbacks:{ label: c => ` ${c.dataset.label}: ${c.parsed.y.toLocaleString('it-IT')}` }
+      }
+    },
+    scales:{
+      x:{ grid:{display:false}, ticks:{color:'#6b7280', font:{size:11}}, border:{color:'#e5e7eb'} },
+      y:{ grid:{color:'#f3f4f6', drawBorder:false}, ticks:{color:'#9ca3af', font:{size:11}}, border:{display:false} }
     }
   }
 });
