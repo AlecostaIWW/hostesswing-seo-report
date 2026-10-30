@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Report SEO — HostessWing — Ottobre 2026</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<style>
+  :root {
+    --violet:#9D4EDD; --violet-light:#F3E8FF; --violet-mid:#C084FC; --violet-dark:#6B21A8;
+    --magenta:#E91E8C; --magenta-light:#FCE7F3; --magenta-dark:#9D174D;
+    --text:#1a1a1a; --muted:#6b7280; --border:#e5e7eb; --bg:#f9fafb; --white:#ffffff;
+    --green:#16a34a; --red:#dc2626;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);font-size:15px;line-height:1.6;}
+  .page{max-width:980px;margin:0 auto;padding:40px 24px 80px;}
+
+  /* HEADER */
+  .header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:36px;padding-bottom:24px;border-bottom:3px solid;}
+  .header{border-image:linear-gradient(90deg,var(--violet),var(--magenta)) 1;}
+  .logo-bar{display:flex;align-items:center;gap:8px;margin-bottom:6px;}
+  .logo-dot{width:9px;height:9px;border-radius:50%;background:linear-gradient(135deg,var(--violet),var(--magenta));}
+  .logo-text{font-size:11px;font-weight:700;letter-spacing:0.1em;color:var(--violet);text-transform:uppercase;}
+  .header h1{font-size:26px;font-weight:700;line-height:1.2;}
+  .header h1 span{background:linear-gradient(90deg,var(--violet),var(--magenta));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+  .header-meta{font-size:13px;color:var(--muted);margin-top:5px;}
+  .header-right{text-align:right;}
+  .pl{font-size:11px;font-weight:700;letter-spacing:0.06em;color:var(--muted);text-transform:uppercase;}
+  .pv{font-size:13px;font-weight:600;color:var(--text);margin-top:2px;}
+
+  /* KPI */
+  .kpi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px;}
+  .kpi{background:var(--white);border:1px solid var(--border);border-radius:10px;padding:16px 15px 14px;position:relative;overflow:hidden;}
+  .kpi.hi::after{content:'';position:absolute;top:0;left:0;width:100%;height:3px;background:linear-gradient(90deg,var(--violet),var(--magenta));}
+  .kpi.hi{border-color:var(--violet);}
+  .kpi.mg::after{content:'';position:absolute;top:0;left:0;width:100%;height:3px;background:var(--magenta);}
+  .kpi.mg{border-color:var(--magenta);}
+  .kl{font-size:10px;font-weight:700;letter-spacing:0.07em;color:var(--muted);text-transform:uppercase;margin-bottom:6px;}
+  .kv{font-size:24px;font-weight:700;line-height:1;}
+  .kpi.hi .kv{background:linear-gradient(90deg,var(--violet),var(--magenta));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+  .kpi.mg .kv{color:var(--magenta);}
+  .ks{font-size:11px;color:var(--muted);margin-top:4px;}
+  .tu{font-size:11px;font-weight:700;color:var(--green);margin-top:4px;}
+  .td{font-size:11px;font-weight:700;color:var(--red);margin-top:4px;}
+  .tn{font-size:11px;font-weight:600;color:var(--muted);margin-top:4px;}
+
+  /* NOTE BOX */
+  .note-box{border-left:3px solid var(--magenta);background:var(--magenta-light);border-radius:0 8px 8px 0;padding:14px 18px;margin-bottom:36px;font-size:13px;color:var(--magenta-dark);line-height:1.65;}
+  .note-box strong{font-weight:700;}
+  .note-box p + p{margin-top:9px;}
+  .note-box .nb-title{font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--violet-dark);margin-bottom:8px;}
+
+  /* SECTIONS */
+  .section{margin-bottom:40px;}
+  .sh{display:flex;align-items:center;gap:10px;margin-bottom:16px;}
+  .sn{width:23px;height:23px;border-radius:50%;background:linear-gradient(135deg,var(--violet),var(--magenta));color:#fff;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .st{font-size:15px;font-weight:700;}
+  .ss{font-size:12px;color:var(--muted);margin-left:auto;}
+
+  /* CALLOUT */
+  .callout{border-left:3px solid var(--violet);background:var(--violet-light);border-radius:0 8px 8px 0;padding:13px 16px;margin-bottom:16px;font-size:13px;color:var(--violet-dark);line-height:1.6;}
+  .callout.mg{border-color:var(--magenta);background:var(--magenta-light);color:var(--magenta-dark);}
+  .callout strong{font-weight:700;}
+  .callout p + p{margin-top:8px;}
+
+  /* CHART */
+  .chart-card{background:var(--white);border:1px solid var(--border);border-radius:10px;padding:22px;}
+  .chart-wrap{position:relative;width:100%;height:280px;}
+  .cleg{display:flex;gap:16px;margin-top:14px;font-size:11.5px;color:var(--muted);flex-wrap:wrap;}
+  .li{display:flex;align-items:center;gap:6px;}
+  .ld{width:20px;height:3px;border-radius:2px;display:inline-block;}
+
+  /* TABLES */
+  .table-card{background:var(--white);border:1px solid var(--border);border-radius:10px;overflow:hidden;}
+  table{width:100%;border-collapse:collapse;table-layout:fixed;}
+  thead tr{background:var(--violet-light);}
+  thead th{font-size:10px;font-weight:700;letter-spacing:0.07em;color:var(--violet-dark);text-transform:uppercase;padding:11px 13px;text-align:left;}
+  thead th.r{text-align:right;}
+  tbody tr{border-top:1px solid var(--border);}
+  tbody tr:hover{background:#fdf4ff;}
+  td{padding:10px 13px;font-size:13px;vertical-align:middle;}
+  td.r{text-align:right;color:var(--muted);}
+  .pn{font-weight:600;color:var(--violet-dark);display:block;}
+  .pu{font-size:11px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .br{display:flex;align-items:center;gap:7px;}
+  .bb{flex:1;height:6px;background:var(--violet-light);border-radius:3px;overflow:hidden;}
+  .bf{height:100%;background:linear-gradient(90deg,var(--violet),var(--magenta));border-radius:3px;}
+  .bn{font-size:12px;font-weight:600;min-width:36px;text-align:right;}
+
+  /* BADGES */
+  .badge{display:inline-flex;align-items:center;justify-content:center;min-width:34px;height:21px;border-radius:4px;font-size:11px;font-weight:700;padding:0 4px;}
+  .b1{background:#fef9c3;color:#854d0e;}
+  .b2{background:#dcfce7;color:#166534;}
+  .b3{background:var(--violet-light);color:var(--violet-dark);}
+  .bx{background:#f3f4f6;color:#4b5563;}
+  .delta-up{background:#dcfce7;color:#166534;border-radius:4px;padding:2px 6px;font-size:11px;font-weight:700;}
+  .delta-down{background:#fee2e2;color:#991b1b;border-radius:4px;padding:2px 6px;font-size:11px;font-weight:700;}
+  .delta-flat{background:#f3f4f6;color:#6b7280;border-radius:4px;padding:2px 6px;font-size:11px;font-weight:700;}
+  .delta-new{background:#fef9c3;color:#854d0e;border-radius:4px;padding:2px 6px;font-size:11px;font-weight:700;}
+  .ch{color:var(--green);font-weight:700;}
+  .cm{color:var(--violet);font-weight:600;}
+  .cl{color:var(--muted);}
+
+  /* INSIGHT */
+  .insight{background:var(--magenta-light);border:1px solid #fbcfe8;border-radius:8px;padding:14px 16px;font-size:13px;color:var(--magenta-dark);line-height:1.6;}
+  .insight strong{font-weight:700;}
+  .insight p + p{margin-top:8px;}
+
+  /* GSC NOTE */
+  .gsc-note{background:#f8fafc;border:1px solid var(--border);border-radius:6px;padding:10px 14px;font-size:12px;color:var(--muted);margin-bottom:14px;line-height:1.5;}
+  .gsc-note strong{color:var(--text);}
+
+  /* FOOTER */
+  .footer{margin-top:56px;padding-top:18px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;}
+  .fb{font-size:12px;font-weight:700;background:linear-gradient(90deg,var(--violet),var(--magenta));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+  .fn{font-size:11px;color:var(--muted);}
+
+  @media(max-width:700px){
+    .kpi-grid{grid-template-columns:repeat(2,1fr);}
+    .header{flex-direction:column;gap:10px;}
+  }
+  .kpi-grid.g3{grid-template-columns:repeat(3,1fr);}
+  .cn{font-size:11.5px;color:var(--muted);margin-top:3px;line-height:1.45;}
+  td.ql{font-weight:600;}
+  .bar2{display:flex;height:10px;border-radius:5px;overflow:hidden;background:var(--violet-light);margin-top:6px;}
+  .bar2 i{display:block;height:100%;background:linear-gradient(90deg,var(--violet),var(--magenta));}
+</style>
+</head>
+<body>
+<div class="page">
+<div class="header">
+  <div>
+    <div class="logo-bar"><div class="logo-dot"></div><span class="logo-text">Report SEO</span></div>
+    <h1><span>HostessWing</span></h1>
+    <div class="header-meta">Sito e blog · Traffico organico</div>
+  </div>
+  <div class="header-right">
+    <div class="pl">Periodo analisi</div>
+    <div class="pv">1 – 28 ott 2026 vs 3 – 30 set 2026</div>
+    <div class="pl" style="margin-top:10px;">Grafico andamento</div>
+    <div class="pv">29 ott 2025 – 28 ott 2026</div>
+  </div>
+</div>
+
+<div class="kpi-grid" id="kpis"></div>
+
+<div class="note-box">
+  <div class="nb-title">Riassunto osservazioni</div>
+  <p><strong>Il sito tiene il record di settembre e lo consolida:</strong> click +3,2% (28.949 vs 28.040) con impressioni in calo dell'11,3%. Ottobre chiude a 1.034 click/giorno di media, il mese più alto dei 12 analizzati.</p>
+  <p><strong>La crescita è ancora tutta CTR e posizione, non domanda nuova:</strong> il CTR sale dal 55,3% al 64,4%, la posizione media da 4,08 a 3,46. Le query di marca valgono il 98% dei click di query visibili.</p>
+  <p><strong>Il blog invece cala del 30%</strong> (630 click da 903) dopo il picco di settembre: pesano la pagina tag sugar-daddy (−51%), hostess-cene (−72%) e le pagine di marca. Bene il cluster wing woman sulle query (+61%) e sugar-dating, che sale da posizione 24,5 a 12,1.</p>
+</div>
+
+<div class="section">
+  <div class="sh"><div class="sn">1</div><div class="st">Andamento generale — 12 mesi</div><div class="ss">Click giornalieri · 29 ott 2025 – 28 ott 2026</div></div>
+  <div class="callout"><strong>Ottobre è il mese più forte dell'anno:</strong> 1.034 click/giorno (settembre 997, marzo 905), partendo dal minimo di maggio (560/giorno). Il record giornaliero resta il <strong>18 settembre con 1.259 click</strong>; in ottobre i picchi sono il 26 (1.170) e l'8 e il 12 (1.165). Le impressioni, al contrario, sono al livello più basso da mesi (1.606/giorno contro circa 1.850 a settembre e circa 2.000 in primavera).</div>
+  <div class="chart-card">
+    <div class="chart-wrap"><canvas id="mainChart"></canvas></div>
+    <div class="cleg">
+      <span class="li"><span class="ld" style="background:#C084FC;"></span>Ott 2025–Gen 2026</span>
+      <span class="li"><span class="ld" style="background:#9D4EDD;"></span>Feb–Mag 2026</span>
+      <span class="li"><span class="ld" style="background:#E91E8C;"></span>Giu–Ago 2026</span>
+      <span class="li"><span class="ld" style="background:#6B21A8;"></span>Set–Ott 2026</span>
+      <span class="li"><span class="ld" style="background:#374151;"></span>Media 7gg</span>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="sh"><div class="sn">2</div><div class="st">Branded e non-branded</div><div class="ss">Query · 28 giorni vs 28 precedenti</div></div>
+  <div class="gsc-note"><strong>Nota:</strong> la classificazione è sulle query visibili in GSC (circa il 93% dei click del sito; il resto è anonimizzato). Il "branded" comprende nome, refusi e varianti (hostess wing, hostesswing, wostess wing, escort wing…). Le percentuali di CTR non sono confrontabili con quelle del report di settembre, che usava una selezione diversa.</div>
+  <div class="table-card">
+    <table>
+      <thead><tr>
+        <th style="width:24%">Gruppo</th>
+        <th class="r" style="width:20%">Click</th>
+        <th class="r" style="width:14%">Impressioni</th>
+        <th class="r" style="width:13%">CTR</th>
+        <th class="r" style="width:14%">Posizione</th>
+        <th style="width:15%">Quota click</th>
+      </tr></thead>
+      <tbody id="bn-body"></tbody>
+    </table>
+  </div>
+  <div class="callout mg" style="margin-top:14px;" id="brand-note"></div>
+  <div class="callout" id="nb-note"></div>
+</div>
+
+<div class="section">
+  <div class="sh"><div class="sn">3</div><div class="st">Cluster di keyword</div><div class="ss">Wing woman · escort · sugar · hostess</div></div>
+  <div class="gsc-note"><strong>Nota GSC:</strong> i volumi non-branded sono piccoli e le query a basso volume sono incomplete, quindi i cluster vanno letti come direzione, non come numeri assoluti. Le query "escort wing" e simili sono contate nel brand (ricerche del nome).</div>
+  <div class="table-card" style="margin-bottom:16px;">
+    <table>
+      <thead><tr>
+        <th style="width:30%">Cluster</th>
+        <th class="r" style="width:20%">Click</th>
+        <th class="r" style="width:12%">Query</th>
+        <th class="r" style="width:16%">Impressioni</th>
+        <th class="r" style="width:22%">Posizione media</th>
+      </tr></thead>
+      <tbody id="cl-body"></tbody>
+    </table>
+  </div>
+  <div class="callout" id="cl-note"></div>
+  <div class="table-card">
+    <table>
+      <thead><tr>
+        <th style="width:34%">Query principali</th>
+        <th class="r" style="width:22%">Click</th>
+        <th class="r" style="width:16%">Impressioni</th>
+        <th class="r" style="width:12%">CTR</th>
+        <th class="r" style="width:16%">Posiz.</th>
+      </tr></thead>
+      <tbody id="kw-body"></tbody>
+    </table>
+  </div>
+</div>
+
+<div class="section">
+  <div class="sh"><div class="sn">4</div><div class="st">Confronto diretto pagine</div><div class="ss">Blog IT · 1–28 ott vs 3–30 set 2026</div></div>
+  <div class="callout">Pagine del blog in italiano con almeno 3 click in uno dei due periodi. Escluse homepage (28.494 click, +3,6%), login, pagine /en/ e /es/, pagine di test e URL con parametri. Le impressioni alte con CTR sotto l'1% su pagine in posizione 1-2 (tag sugar-daddy, come-funziona, prezzi, hostess-cene, chi-siamo) sono in gran parte sitelink mostrati sotto le ricerche di marca.</div>
+  <div class="table-card" style="margin-bottom:16px;">
+    <table>
+      <thead><tr>
+        <th style="width:34%">Cluster pagine</th>
+        <th class="r" style="width:22%">Click</th>
+        <th class="r" style="width:14%">Δ</th>
+        <th style="width:30%"></th>
+      </tr></thead>
+      <tbody id="pcl-body"></tbody>
+    </table>
+  </div>
+  <div class="table-card">
+    <table>
+      <thead><tr>
+        <th style="width:33%"># Pagina</th>
+        <th style="width:21%">Click</th>
+        <th class="r" style="width:10%">Δ</th>
+        <th class="r" style="width:14%">Impressioni</th>
+        <th class="r" style="width:9%">CTR</th>
+        <th class="r" style="width:13%">Posiz.</th>
+      </tr></thead>
+      <tbody id="pages-body"></tbody>
+    </table>
+  </div>
+</div>
+
+<div class="section">
+  <div class="sh"><div class="sn">5</div><div class="st">Mercato Spagna</div><div class="ss">Ultimi 3 mesi · Country: Spain · Search type: Web</div></div>
+  <div class="kpi-grid" style="grid-template-columns:repeat(4,1fr);margin-bottom:16px;">
+    <div class="kpi hi"><div class="kl">Click</div><div class="kv">1,42K</div><div class="ks">29 lug – 28 ott</div></div>
+    <div class="kpi"><div class="kl">Impressioni</div><div class="kv">2,86K</div></div>
+    <div class="kpi"><div class="kl">CTR medio</div><div class="kv">49,7%</div></div>
+    <div class="kpi mg"><div class="kl">Posizione media</div><div class="kv">3,5</div></div>
+  </div>
+  <div class="callout mg">
+    <p><strong>Traffico stabile e quasi tutto di marca.</strong> Il filtro Spagna dà circa 15 click al giorno senza una direzione chiara in tre mesi; i picchi sono isolati (circa 39 click il 26 agosto, 34 il 23 settembre). Le impressioni toccano il massimo (circa 45) a fine ottobre. CTR 49,7% e posizione 3,5 sono coerenti con ricerche del nome più che con contenuti.</p>
+    <p><strong>Le pagine /es/ pesano ancora poco:</strong> nell'ultimo periodo producono 24 click (38 nel precedente), cioè circa il 5% dei click spagnoli stimati (~430 ogni 28 giorni). Il dato è un'indicazione: lo screenshot riporta solo i totali del trimestre, senza confronto con il periodo precedente né dettaglio per pagina.</p>
+  </div>
+</div>
+
+<div class="footer">
+  <div class="fb">hostesswing.com</div>
+  <div class="fn">Fonte: Google Search Console · Generato il 30 ottobre 2026</div>
+</div>
+</div>
+
+<script>
+const D={"clusters": {"Wing woman": {"n": 46, "c": 509, "pc": 316, "i": 1251, "pi": 1112, "pos": 4.64, "ppos": 5.22}, "Escort / accompagnatrici": {"n": 695, "c": 96, "pc": 88, "i": 1608, "pi": 1762, "pos": 9.29, "ppos": 9.78}, "Sugar / uomini ricchi": {"n": 63, "c": 7, "pc": 2, "i": 440, "pi": 373, "pos": 15.51, "ppos": 23.9}, "Hostess / agenzie": {"n": 179, "c": 3, "pc": 16, "i": 1320, "pi": 1476, "pos": 15.06, "ppos": 17.74}, "Altre": {"n": 345, "c": 12, "pc": 29, "i": 438, "pi": 683, "pos": 16.21, "ppos": 13.78}}, "brand": {"n": 94, "c": 26401, "pc": 25715, "i": 31817, "pi": 36398, "pos": 1.65, "ppos": 2.27}, "nonbrand": {"n": 1328, "c": 627, "pc": 451, "i": 5057, "pi": 5406, "pos": 10.79, "ppos": 12.5}, "top": {"Wing woman": [{"q": "wingwoman", "c": 293, "pc": 133, "i": 558, "ctr": "52.51%", "pos": 2.35}, {"q": "wing woman", "c": 124, "pc": 108, "i": 275, "ctr": "45.09%", "pos": 3.31}, {"q": "wings woman", "c": 42, "pc": 5, "i": 52, "ctr": "80.77%", "pos": 4.38}, {"q": "hostess wing woman", "c": 12, "pc": 44, "i": 25, "ctr": "48%", "pos": 3.68}, {"q": "wing girl", "c": 10, "pc": 8, "i": 34, "ctr": "29.41%", "pos": 2.62}], "Escort / accompagnatrici": [{"q": "accompagnatrici", "c": 7, "pc": 5, "i": 81, "ctr": "8.64%", "pos": 10.06}, {"q": "escort verona", "c": 5, "pc": 1, "i": 38, "ctr": "13.16%", "pos": 12.95}, {"q": "siti escort", "c": 4, "pc": 3, "i": 47, "ctr": "8.51%", "pos": 13.47}, {"q": "escort roma", "c": 4, "pc": 0, "i": 23, "ctr": "17.39%", "pos": 3.3}, {"q": "escort napoli", "c": 3, "pc": 0, "i": 20, "ctr": "15%", "pos": 7.2}], "Sugar / uomini ricchi": [{"q": "come trovare un uomo ricco da sposare", "c": 2, "pc": 0, "i": 27, "ctr": "7.41%", "pos": 5.0}, {"q": "cercasi uomo ricco", "c": 2, "pc": 0, "i": 6, "ctr": "33.33%", "pos": 9.33}, {"q": "sugardaddy", "c": 1, "pc": 0, "i": 33, "ctr": "3.03%", "pos": 28.24}, {"q": "posti frequentati da uomini ricchi", "c": 1, "pc": 0, "i": 15, "ctr": "6.67%", "pos": 4.2}, {"q": "come trovare sugar daddy", "c": 1, "pc": 0, "i": 10, "ctr": "10%", "pos": 6.8}], "Hostess / agenzie": [{"q": "hostess girl", "c": 1, "pc": 1, "i": 7, "ctr": "14.29%", "pos": 6.57}, {"q": "ragazza immagine milano", "c": 1, "pc": 0, "i": 1, "ctr": "100%", "pos": 38.0}, {"q": "hostess*", "c": 1, "pc": 0, "i": 1, "ctr": "100%", "pos": 91.0}, {"q": "w hostess", "c": 0, "pc": 1, "i": 387, "ctr": "0%", "pos": 4.44}, {"q": "cubista discoteca", "c": 0, "pc": 2, "i": 201, "ctr": "0%", "pos": 7.33}]}, "btop": [{"q": "hostess wing", "c": 12176, "pc": 11289}, {"q": "hostesswing", "c": 11239, "pc": 11622}, {"q": "hostesswings", "c": 405, "pc": 391}, {"q": "winghostess", "c": 392, "pc": 372}, {"q": "hostess wings", "c": 295, "pc": 202}, {"q": "wostess wing", "c": 276, "pc": 182}, {"q": "wing hostess", "c": 248, "pc": 229}, {"q": "hostesswing app", "c": 241, "pc": 194}], "bd": {"two": 23415, "total": 26401, "typo": 2986}, "pages": [{"name": "Sugar Daddy App (tag)", "url": "/tag/sugar-daddy-app/", "cluster": "Sugar dating", "lc": 153, "pc": 315, "impr": 25083, "pimpr": 26002, "ctr": "0.61%", "pos": 2.01, "ppos": 1.01, "comment": "Dimezzata: impressioni stabili (~25K) ma posizione da 1,01 a 2,01 e CTR da 1,21% a 0,61%. Resta la pagina più forte del blog, ma ha perso metà dei click dopo il picco di settembre."}, {"name": "Come Funziona HostessWing", "url": "/come-funziona-hostesswing/", "cluster": "Branded", "lc": 111, "pc": 142, "impr": 26282, "pimpr": 25241, "ctr": "0.42%", "pos": 2.26, "ppos": 1.12, "comment": "Calo moderato (−22%) con impressioni in leggera crescita: CTR da 0,56% a 0,42%, posizione da 1,12 a 2,26."}, {"name": "Come riconoscere e scegliere i clienti migliori", "url": "/come-riconoscere-scegliere-clienti-migliori/", "cluster": "Altro", "lc": 66, "pc": 0, "impr": 123, "pimpr": 28, "ctr": "53.66%", "pos": 2.68, "ppos": 5.39, "comment": "Nuova: 66 click da zero con sole 123 impressioni (CTR 54%). Un CTR così alto indica ricerche mirate o traffico diretto, non domanda organica generica — da verificare la fonte."}, {"name": "Prezzi Crediti", "url": "/prezzi-crediti/", "cluster": "Branded", "lc": 59, "pc": 94, "impr": 22248, "pimpr": 23872, "ctr": "0.27%", "pos": 2.42, "ppos": 1.13, "comment": "−37% con impressioni quasi invariate: perde CTR (da 0,39% a 0,27%) e posizione (da 1,13 a 2,42)."}, {"name": "Hostess per Cene", "url": "/hostess-cene/", "cluster": "Escort / accompagnatrici", "lc": 34, "pc": 121, "impr": 19485, "pimpr": 26105, "ctr": "0.17%", "pos": 1.23, "ppos": 1.19, "comment": "Il calo più forte tra le pagine grandi (−72%). Posizione invariata (1,23): non è una perdita di ranking ma di CTR (da 0,46% a 0,17%). Da capire cosa è cambiato in SERP rispetto a settembre."}, {"name": "Dove trovare uomini ricchi", "url": "/dove-trovare-uomini-ricchi-guida-pratica/", "cluster": "Sugar dating", "lc": 27, "pc": 23, "impr": 865, "pimpr": 872, "ctr": "3.12%", "pos": 7.35, "ppos": 8.63, "comment": "Click +17% con posizione in miglioramento (da 8,63 a 7,35): unica pagina sugar di contenuto in crescita stabile."}, {"name": "Chi Siamo", "url": "/chi-siamo/", "cluster": "Branded", "lc": 24, "pc": 59, "impr": 22352, "pimpr": 25953, "ctr": "0.11%", "pos": 1.54, "ppos": 1.11, "comment": "−59% con posizione stabile attorno a 1,5: stesso schema di hostess-cene, impressioni da sitelink su query di marca."}, {"name": "Wing Hostess — cosa fa", "url": "/wing-hostess-cosa-fa/", "cluster": "Wing woman", "lc": 24, "pc": 29, "impr": 11318, "pimpr": 7504, "ctr": "0.21%", "pos": 1.77, "ppos": 1.66, "comment": "Impressioni +51% ma click −17%: CTR dimezzato (0,21%), posizione 1,77."}, {"name": "Fotomodella di nudo artistico", "url": "/fotomodella-di-nudo-artistico/", "cluster": "Altro", "lc": 21, "pc": 9, "impr": 354, "pimpr": 208, "ctr": "5.93%", "pos": 7.45, "ppos": 10.16, "comment": "Click più che raddoppiati, posizione da 10,2 a 7,5. Pagina IT a rischio policy: da tenere d'occhio."}, {"name": "Agenzia Hostess Roma", "url": "/agenzia-hostess-roma/", "cluster": "Escort / accompagnatrici", "lc": 20, "pc": 19, "impr": 1068, "pimpr": 532, "ctr": "1.87%", "pos": 7.33, "ppos": 9.67, "comment": "Click stabili, impressioni raddoppiate, posizione da 9,67 a 7,33: margine di crescita se sale in top 5."}, {"name": "Sugar Dating", "url": "/sugar-dating/", "cluster": "Sugar dating", "lc": 14, "pc": 9, "impr": 627, "pimpr": 365, "ctr": "2.23%", "pos": 12.09, "ppos": 24.51, "comment": "Posizione migliorata da 24,5 a 12,1 e click +56%: si avvicina alla prima pagina."}, {"name": "Wing Woman", "url": "/wing-woman/", "cluster": "Wing woman", "lc": 14, "pc": 17, "impr": 2664, "pimpr": 3048, "ctr": "0.53%", "pos": 2.79, "ppos": 2.33, "comment": "Stabile (14 da 17) ma posizione da 2,33 a 2,79: la crescita del cluster wing woman passa dalle query, non da questa pagina."}, {"name": "Siti per conoscere uomini ricchi", "url": "/siti-conoscere-uomini-ricchi/", "cluster": "Sugar dating", "lc": 12, "pc": 4, "impr": 185, "pimpr": 88, "ctr": "6.49%", "pos": 9.05, "ppos": 8.31, "comment": "Triplicata (12 da 4), posizione 9,05."}, {"name": "Siti Incontri Seri", "url": "/siti-incontri-seri/", "cluster": "Escort / accompagnatrici", "lc": 9, "pc": 11, "impr": 309, "pimpr": 316, "ctr": "2.91%", "pos": 5.5, "ppos": 5.21, "comment": ""}, {"name": "Agenzia Hostess Milano", "url": "/agenzia-hostess-milano/", "cluster": "Escort / accompagnatrici", "lc": 6, "pc": 9, "impr": 335, "pimpr": 320, "ctr": "1.79%", "pos": 8.37, "ppos": 10.0, "comment": ""}, {"name": "Agenzia Hostess Napoli", "url": "/agenzia-hostess-napoli/", "cluster": "Escort / accompagnatrici", "lc": 6, "pc": 4, "impr": 157, "pimpr": 160, "ctr": "3.82%", "pos": 8.06, "ppos": 12.13, "comment": ""}, {"name": "Hostess Cubista Discoteca", "url": "/hostess-cubista-discoteca/", "cluster": "Altro", "lc": 5, "pc": 8, "impr": 694, "pimpr": 1329, "ctr": "0.72%", "pos": 6.91, "ppos": 6.44, "comment": ""}, {"name": "Diventa una Wing", "url": "/diventa-una-wing/", "cluster": "Wing woman", "lc": 5, "pc": 10, "impr": 375, "pimpr": 322, "ctr": "1.33%", "pos": 6.8, "ppos": 5.91, "comment": ""}, {"name": "Alternative a Tinder Italia", "url": "/alternative-tinder-italia/", "cluster": "Altro", "lc": 5, "pc": 6, "impr": 369, "pimpr": 408, "ctr": "1.36%", "pos": 3.94, "ppos": 3.54, "comment": ""}, {"name": "Come trovare uno sugar daddy su Instagram", "url": "/come-trovare-uno-sugar-daddy-instagram/", "cluster": "Sugar dating", "lc": 4, "pc": 3, "impr": 230, "pimpr": 72, "ctr": "1.74%", "pos": 7.9, "ppos": 11.38, "comment": ""}, {"name": "Annunci donne in cerca di amicizia", "url": "/annunci-donne-cerca-amicizia/", "cluster": "Altro", "lc": 4, "pc": 3, "impr": 43, "pimpr": 44, "ctr": "9.3%", "pos": 20.79, "ppos": 15.73, "comment": ""}, {"name": "Ragazza Immagine — cosa fa", "url": "/ragazza-immagine-cosa-fa/", "cluster": "Altro", "lc": 2, "pc": 3, "impr": 306, "pimpr": 683, "ctr": "0.65%", "pos": 22.41, "ppos": 19.89, "comment": ""}], "pagecl": {"Sugar dating": [210, 354], "Branded": [194, 295], "Altro": [103, 29], "Escort / accompagnatrici": [75, 164], "Wing woman": [43, 56]}, "blog": [630, 903], "clicks": [593, 668, 598, 516, 696, 605, 682, 651, 733, 632, 552, 636, 644, 665, 629, 616, 646, 628, 710, 777, 810, 628, 682, 662, 631, 711, 716, 707, 636, 635, 622, 520, 619, 779, 800, 662, 662, 672, 592, 633, 697, 771, 700, 734, 715, 584, 750, 738, 745, 620, 742, 719, 684, 772, 698, 706, 549, 620, 667, 748, 744, 774, 645, 509, 534, 814, 728, 812, 807, 857, 890, 768, 848, 861, 867, 941, 948, 883, 879, 918, 888, 951, 912, 966, 914, 938, 957, 795, 891, 902, 895, 820, 896, 870, 778, 846, 994, 969, 845, 764, 799, 670, 729, 778, 820, 879, 830, 746, 604, 748, 937, 870, 880, 870, 815, 704, 814, 1092, 1113, 1016, 834, 831, 729, 897, 1021, 1066, 996, 899, 850, 711, 687, 978, 1098, 1074, 1038, 941, 814, 761, 955, 955, 887, 885, 868, 750, 840, 953, 1131, 979, 978, 858, 730, 749, 937, 769, 946, 871, 898, 849, 858, 976, 1162, 1100, 996, 1073, 781, 933, 1018, 922, 749, 782, 669, 621, 583, 676, 622, 627, 585, 612, 515, 585, 646, 533, 511, 494, 378, 439, 435, 621, 643, 614, 493, 622, 500, 579, 630, 602, 479, 605, 595, 547, 579, 695, 678, 557, 527, 535, 423, 528, 591, 611, 601, 654, 541, 474, 577, 607, 658, 736, 772, 697, 509, 644, 743, 728, 571, 505, 481, 508, 587, 659, 729, 684, 666, 582, 636, 628, 789, 664, 659, 691, 691, 518, 512, 655, 727, 551, 564, 575, 486, 551, 579, 609, 726, 766, 855, 719, 876, 970, 985, 901, 953, 973, 826, 942, 1005, 1055, 1075, 1104, 909, 810, 956, 985, 943, 895, 844, 742, 724, 785, 908, 830, 873, 847, 766, 796, 851, 855, 834, 764, 788, 753, 676, 839, 975, 922, 818, 871, 865, 808, 791, 880, 1100, 1021, 834, 878, 778, 908, 963, 912, 964, 901, 945, 803, 887, 1140, 938, 907, 984, 1122, 990, 938, 1143, 965, 1118, 1069, 1259, 905, 860, 1075, 1082, 973, 1043, 981, 836, 865, 1118, 1059, 1134, 1085, 980, 817, 925, 1089, 1077, 1064, 1165, 1123, 914, 936, 1165, 1094, 1136, 1131, 946, 887, 1005, 1114, 1120, 1092, 1064, 1028, 839, 936, 1170, 1038, 1009], "dates": ["2025-10-29", "2025-10-30", "2025-10-31", "2025-11-01", "2025-11-02", "2025-11-03", "2025-11-04", "2025-11-05", "2025-11-06", "2025-11-07", "2025-11-08", "2025-11-09", "2025-11-10", "2025-11-11", "2025-11-12", "2025-11-13", "2025-11-14", "2025-11-15", "2025-11-16", "2025-11-17", "2025-11-18", "2025-11-19", "2025-11-20", "2025-11-21", "2025-11-22", "2025-11-23", "2025-11-24", "2025-11-25", "2025-11-26", "2025-11-27", "2025-11-28", "2025-11-29", "2025-11-30", "2025-12-01", "2025-12-02", "2025-12-03", "2025-12-04", "2025-12-05", "2025-12-06", "2025-12-07", "2025-12-08", "2025-12-09", "2025-12-10", "2025-12-11", "2025-12-12", "2025-12-13", "2025-12-14", "2025-12-15", "2025-12-16", "2025-12-17", "2025-12-18", "2025-12-19", "2025-12-20", "2025-12-21", "2025-12-22", "2025-12-23", "2025-12-24", "2025-12-25", "2025-12-26", "2025-12-27", "2025-12-28", "2025-12-29", "2025-12-30", "2025-12-31", "2026-01-01", "2026-01-02", "2026-01-03", "2026-01-04", "2026-01-05", "2026-01-06", "2026-01-07", "2026-01-08", "2026-01-09", "2026-01-10", "2026-01-11", "2026-01-12", "2026-01-13", "2026-01-14", "2026-01-15", "2026-01-16", "2026-01-17", "2026-01-18", "2026-01-19", "2026-01-20", "2026-01-21", "2026-01-22", "2026-01-23", "2026-01-24", "2026-01-25", "2026-01-26", "2026-01-27", "2026-01-28", "2026-01-29", "2026-01-30", "2026-01-31", "2026-02-01", "2026-02-02", "2026-02-03", "2026-02-04", "2026-02-05", "2026-02-06", "2026-02-07", "2026-02-08", "2026-02-09", "2026-02-10", "2026-02-11", "2026-02-12", "2026-02-13", "2026-02-14", "2026-02-15", "2026-02-16", "2026-02-17", "2026-02-18", "2026-02-19", "2026-02-20", "2026-02-21", "2026-02-22", "2026-02-23", "2026-02-24", "2026-02-25", "2026-02-26", "2026-02-27", "2026-02-28", "2026-03-01", "2026-03-02", "2026-03-03", "2026-03-04", "2026-03-05", "2026-03-06", "2026-03-07", "2026-03-08", "2026-03-09", "2026-03-10", "2026-03-11", "2026-03-12", "2026-03-13", "2026-03-14", "2026-03-15", "2026-03-16", "2026-03-17", "2026-03-18", "2026-03-19", "2026-03-20", "2026-03-21", "2026-03-22", "2026-03-23", "2026-03-24", "2026-03-25", "2026-03-26", "2026-03-27", "2026-03-28", "2026-03-29", "2026-03-30", "2026-03-31", "2026-04-01", "2026-04-02", "2026-04-03", "2026-04-04", "2026-04-05", "2026-04-06", "2026-04-07", "2026-04-08", "2026-04-09", "2026-04-10", "2026-04-11", "2026-04-12", "2026-04-13", "2026-04-14", "2026-04-15", "2026-04-16", "2026-04-17", "2026-04-18", "2026-04-19", "2026-04-20", "2026-04-21", "2026-04-22", "2026-04-23", "2026-04-24", "2026-04-25", "2026-04-26", "2026-04-27", "2026-04-28", "2026-04-29", "2026-04-30", "2026-05-01", "2026-05-02", "2026-05-03", "2026-05-04", "2026-05-05", "2026-05-06", "2026-05-07", "2026-05-08", "2026-05-09", "2026-05-10", "2026-05-11", "2026-05-12", "2026-05-13", "2026-05-14", "2026-05-15", "2026-05-16", "2026-05-17", "2026-05-18", "2026-05-19", "2026-05-20", "2026-05-21", "2026-05-22", "2026-05-23", "2026-05-24", "2026-05-25", "2026-05-26", "2026-05-27", "2026-05-28", "2026-05-29", "2026-05-30", "2026-05-31", "2026-06-01", "2026-06-02", "2026-06-03", "2026-06-04", "2026-06-05", "2026-06-06", "2026-06-07", "2026-06-08", "2026-06-09", "2026-06-10", "2026-06-11", "2026-06-12", "2026-06-13", "2026-06-14", "2026-06-15", "2026-06-16", "2026-06-17", "2026-06-18", "2026-06-19", "2026-06-20", "2026-06-21", "2026-06-22", "2026-06-23", "2026-06-24", "2026-06-25", "2026-06-26", "2026-06-27", "2026-06-28", "2026-06-29", "2026-06-30", "2026-07-01", "2026-07-02", "2026-07-03", "2026-07-04", "2026-07-05", "2026-07-06", "2026-07-07", "2026-07-08", "2026-07-09", "2026-07-10", "2026-07-11", "2026-07-12", "2026-07-13", "2026-07-14", "2026-07-15", "2026-07-16", "2026-07-17", "2026-07-18", "2026-07-19", "2026-07-20", "2026-07-21", "2026-07-22", "2026-07-23", "2026-07-24", "2026-07-25", "2026-07-26", "2026-07-27", "2026-07-28", "2026-07-29", "2026-07-30", "2026-07-31", "2026-08-01", "2026-08-02", "2026-08-03", "2026-08-04", "2026-08-05", "2026-08-06", "2026-08-07", "2026-08-08", "2026-08-09", "2026-08-10", "2026-08-11", "2026-08-12", "2026-08-13", "2026-08-14", "2026-08-15", "2026-08-16", "2026-08-17", "2026-08-18", "2026-08-19", "2026-08-20", "2026-08-21", "2026-08-22", "2026-08-23", "2026-08-24", "2026-08-25", "2026-08-26", "2026-08-27", "2026-08-28", "2026-08-29", "2026-08-30", "2026-08-31", "2026-09-01", "2026-09-02", "2026-09-03", "2026-09-04", "2026-09-05", "2026-09-06", "2026-09-07", "2026-09-08", "2026-09-09", "2026-09-10", "2026-09-11", "2026-09-12", "2026-09-13", "2026-09-14", "2026-09-15", "2026-09-16", "2026-09-17", "2026-09-18", "2026-09-19", "2026-09-20", "2026-09-21", "2026-09-22", "2026-09-23", "2026-09-24", "2026-09-25", "2026-09-26", "2026-09-27", "2026-09-28", "2026-09-29", "2026-09-30", "2026-10-01", "2026-10-02", "2026-10-03", "2026-10-04", "2026-10-05", "2026-10-06", "2026-10-07", "2026-10-08", "2026-10-09", "2026-10-10", "2026-10-11", "2026-10-12", "2026-10-13", "2026-10-14", "2026-10-15", "2026-10-16", "2026-10-17", "2026-10-18", "2026-10-19", "2026-10-20", "2026-10-21", "2026-10-22", "2026-10-23", "2026-10-24", "2026-10-25", "2026-10-26", "2026-10-27", "2026-10-28"]};
+const it=n=>Number(n).toLocaleString('it-IT');
+const f1=n=>n.toFixed(2).replace('.',',');
+const pct=(a,b)=>b===0?null:Math.round((a-b)/b*100);
+function dBadge(c,pc,th=10){ if(pc===0) return '<span class="delta-new">NEW</span>'; const d=pct(c,pc); const cls=d>th?'delta-up':d<-th?'delta-down':'delta-flat'; return `<span class="${cls}">${d>0?'+':''}${d}%</span>`; }
+function pBadge(p){ const c=p<=1.5?'b1':p<=3?'b2':p<=6?'b3':'bx'; return `<span class="badge ${c}">${f1(p)}</span>`; }
+function arrow(p,pp){ if(!pp) return ''; return p<pp?'<span style="color:var(--green);font-size:10px;">▲</span>':p>pp?'<span style="color:var(--red);font-size:10px;">▼</span>':''; }
+function ctrCls(v){ return v>=10?'ch':v>=2?'cm':'cl'; }
+
+// KPI sito (da Chart.csv, 1-28 ott vs 3-30 set)
+const cl=D.clicks, dt=D.dates;
+const idx=d=>dt.indexOf(d);
+const sum=(a,b)=>cl.slice(idx(a),idx(b)+1).reduce((x,y)=>x+y,0);
+const K={c:28949,pc:28040,i:44958,pi:50706,ctr:64.4,pctr:55.3,pos:3.46,ppos:4.08};
+const kd=(a,b)=>{const d=pct(a,b);return `<div class="${d>=0?'tu':'td'}">${d>=0?'▲':'▼'} ${d>0?'+':''}${d}% vs periodo prec.</div>`;};
+document.getElementById('kpis').innerHTML=`
+ <div class="kpi hi"><div class="kl">Click sito</div><div class="kv">${it(K.c)}</div>${kd(K.c,K.pc)}<div class="ks">da ${it(K.pc)}</div></div>
+ <div class="kpi"><div class="kl">Impressioni</div><div class="kv">${it(K.i)}</div>${kd(K.i,K.pi)}<div class="ks">da ${it(K.pi)}</div></div>
+ <div class="kpi"><div class="kl">CTR</div><div class="kv">${String(K.ctr).replace('.',',')}%</div><div class="tu">▲ +9,1 punti</div><div class="ks">da ${String(K.pctr).replace('.',',')}%</div></div>
+ <div class="kpi"><div class="kl">Posizione media</div><div class="kv">${f1(K.pos)}</div><div class="tu">▲ migliorata</div><div class="ks">da ${f1(K.ppos)}</div></div>
+ <div class="kpi mg"><div class="kl">Click di marca (query)</div><div class="kv">${it(D.brand.c)}</div>${kd(D.brand.c,D.brand.pc)}</div>
+ <div class="kpi mg"><div class="kl">Click blog IT (pagine)</div><div class="kv">${it(D.blog[0])}</div>${kd(D.blog[0],D.blog[1])}<div class="ks">da ${it(D.blog[1])}</div></div>`;
+
+// Branded vs non
+const tot=D.brand.c+D.nonbrand.c;
+function bnRow(name,o){ const ctr=(o.c/o.i*100), pctr=(o.pc/o.pi*100); const share=o.c/tot*100;
+ return `<tr><td class="ql">${name}</td>
+ <td class="r"><div style="font-weight:600;color:var(--text);">${it(o.c)} ${dBadge(o.c,o.pc)}</div><div style="font-size:10px;margin-top:2px;">da ${it(o.pc)}</div></td>
+ <td class="r">${it(o.i)}<div style="font-size:10px;">da ${it(o.pi)} ${dBadge(o.i,o.pi)}</div></td>
+ <td class="r">${f1(ctr)}%<div style="font-size:10px;">da ${f1(pctr)}%</div></td>
+ <td class="r">${pBadge(o.pos)}<div style="font-size:10px;margin-top:2px;">da ${f1(o.ppos)}</div></td>
+ <td><div class="bar2"><i style="width:${share}%"></i></div><div style="font-size:11px;color:var(--muted);margin-top:3px;">${share.toFixed(1).replace('.',',')}%</div></td></tr>`;}
+document.getElementById('bn-body').innerHTML=bnRow('Branded',D.brand)+bnRow('Non-branded',D.nonbrand);
+const b=D.brand, nb=D.nonbrand;
+document.getElementById('brand-note').innerHTML=`<p><strong>Marca: click +${pct(b.c,b.pc)}% con ${Math.abs(pct(b.i,b.pi))}% di impressioni in meno.</strong> Il CTR sulle query di marca passa da ${f1(b.pc/b.pi*100)}% a ${f1(b.c/b.i*100)}% e la posizione da ${f1(b.ppos)} a ${f1(b.pos)}: stessa dinamica di agosto e settembre (meno ricerche di marca "spinte", più click per ricerca). Le due forme principali, "hostess wing" e "hostesswing", fanno l'${Math.round(D.bd.two/D.bd.total*100)}% dei click di marca; il resto (${it(D.bd.typo)} click) sono refusi e varianti, tra cui "wostess wing" (276, da 182), "hostess wings" (295, da 202) e "hostesswinf" (74, da 28).</p>`;
+document.getElementById('nb-note').innerHTML=`<p><strong>Il non-branded visibile in GSC è minuscolo:</strong> ${it(nb.c)} click da query (da ${it(nb.pc)}, +${pct(nb.c,nb.pc)}%), circa il ${(nb.c/tot*100).toFixed(1).replace('.',',')}% del totale. Questa misura sottostima il traffico organico reale del blog perché le query rare sono anonimizzate; per il non-branded fa fede il confronto pagine (sezione 4).</p>`;
+
+// Cluster
+const cb=document.getElementById('cl-body');
+Object.entries(D.clusters).filter(([k])=>k!=='Altre').forEach(([k,o])=>{
+ cb.innerHTML+=`<tr><td class="ql">${k}</td>
+ <td class="r"><div style="font-weight:600;color:var(--text);">${it(o.c)} ${dBadge(o.c,o.pc,15)}</div><div style="font-size:10px;margin-top:2px;">da ${it(o.pc)}</div></td>
+ <td class="r">${it(o.n)}</td><td class="r">${it(o.i)}</td>
+ <td class="r">${pBadge(o.pos)}${arrow(o.pos,o.ppos)}<div style="font-size:10px;margin-top:2px;">da ${f1(o.ppos)}</div></td></tr>`;});
+const W=D.clusters['Wing woman'],E=D.clusters['Escort / accompagnatrici'],S=D.clusters['Sugar / uomini ricchi'],H=D.clusters['Hostess / agenzie'];
+document.getElementById('cl-note').innerHTML=`<p><strong>Wing woman è l'unico cluster con volume reale:</strong> ${W.c} click (da ${W.pc}, +${pct(W.c,W.pc)}%), posizione media da ${f1(W.ppos)} a ${f1(W.pos)}. La spinta viene da "wingwoman" (293 da 133, +120%) e da varianti nuove come "wings woman" (42 da 5); "hostess wing woman" invece cala (12 da 44), probabilmente perché il traffico si sposta sulle forme senza "hostess".</p>
+<p><strong>Escort / accompagnatrici</strong> è stabile (${E.c} click da ${E.pc}) ma in posizione 9-10, quindi lontano dalle prime posizioni. <strong>Sugar</strong> (${S.c} click) e <strong>hostess/agenzie</strong> (${H.c} click) sono praticamente assenti sulle query: il traffico di questi temi arriva dalle pagine (tag sugar-daddy, hostess-cene, agenzie) via sitelink e query lunghe non riportate.</p>`;
+const kb=document.getElementById('kw-body');
+Object.entries(D.top).forEach(([k,arr])=>{
+ kb.innerHTML+=`<tr style="background:#faf5ff;"><td colspan="5" style="font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--violet-dark);padding:8px 13px;">${k}</td></tr>`;
+ arr.filter(q=>q.c>0||q.pc>0).forEach(q=>{ const cn=parseFloat(q.ctr);
+  kb.innerHTML+=`<tr><td><strong>${q.q}</strong></td><td class="r"><div style="font-weight:600;color:var(--text);">${q.c} ${dBadge(q.c,q.pc)}</div><div style="font-size:10px;margin-top:2px;">da ${q.pc}</div></td><td class="r">${it(q.i)}</td><td class="r"><span class="${ctrCls(cn)}">${q.ctr}</span></td><td class="r">${pBadge(q.pos)}</td></tr>`;});});
+
+// Cluster pagine
+const pcb=document.getElementById('pcl-body'); const mx=Math.max(...Object.values(D.pagecl).map(x=>x[0]));
+Object.entries(D.pagecl).sort((a,b)=>b[1][0]-a[1][0]).forEach(([k,[c,pc]])=>{
+ pcb.innerHTML+=`<tr><td class="ql">${k}</td><td class="r"><span style="font-weight:600;color:var(--text);">${c}</span> <span style="font-size:10px;">da ${pc}</span></td><td class="r">${dBadge(c,pc)}</td><td><div class="bb"><div class="bf" style="width:${c/mx*100}%"></div></div></td></tr>`;});
+
+// Pagine
+const cc={"Sugar dating":"b1","Escort / accompagnatrici":"b2","Wing woman":"b3","Branded":"bx","Altro":"bx"};
+const pb=document.getElementById('pages-body'); const maxC=Math.max(...D.pages.map(p=>p.lc));
+D.pages.forEach((p,i)=>{ const cn=parseFloat(p.ctr);
+ pb.innerHTML+=`<tr><td><span style="font-size:10px;color:var(--muted);margin-right:5px;">${i+1}</span><span class="pn">${p.name}</span><span class="pu">blog.hostesswing.com${p.url}</span><span class="badge ${cc[p.cluster]||'bx'}" style="margin-top:4px;font-size:9px;height:17px;">${p.cluster}</span>${p.comment?`<div style="font-size:11px;color:var(--muted);margin-top:6px;line-height:1.45;white-space:normal;">${p.comment}</div>`:''}</td>
+ <td><div class="br"><div class="bb"><div class="bf" style="width:${p.lc/maxC*100}%"></div></div><span class="bn">${p.lc}</span></div><div style="font-size:10px;color:var(--muted);margin-top:2px;">da ${p.pc}</div></td>
+ <td class="r">${dBadge(p.lc,p.pc)}</td><td class="r">${it(p.impr)}<div style="font-size:10px;">da ${it(p.pimpr)}</div></td>
+ <td class="r"><span class="${ctrCls(cn)}">${p.ctr}</span></td>
+ <td class="r">${pBadge(p.pos)}${arrow(p.pos,p.ppos)}<div style="font-size:10px;margin-top:2px;">da ${f1(p.ppos)}</div></td></tr>`;});
+
+// Grafico
+const avg7=cl.map((_,i)=>{const s=cl.slice(Math.max(0,i-6),i+1);return Math.round(s.reduce((a,b)=>a+b,0)/s.length);});
+const colors=dt.map(d=>d<'2026-02-01'?'rgba(192,132,252,0.85)':d<'2026-06-01'?'rgba(157,78,221,0.85)':d<'2026-09-01'?'rgba(233,30,140,0.85)':'rgba(107,33,168,0.9)');
+const mn=['Gen','Feb','Mar','Apr','Mag','Giu','Lug','Ago','Set','Ott','Nov','Dic'];
+const labels=dt.map(d=>(d.slice(8)==='01'||d==='2025-10-29')?mn[+d.slice(5,7)-1]+' '+d.slice(2,4):'');
+new Chart(document.getElementById('mainChart').getContext('2d'),{type:'bar',data:{labels,datasets:[
+ {type:'bar',label:'Click giornalieri',data:cl,backgroundColor:colors,borderWidth:0,barPercentage:0.9,categoryPercentage:0.95,order:2},
+ {type:'line',label:'Media 7gg',data:avg7,borderColor:'#374151',borderWidth:2,pointRadius:0,tension:0.4,fill:false,order:1}]},
+ options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},
+ plugins:{legend:{display:false},tooltip:{backgroundColor:'#fff',borderColor:'#e5e7eb',borderWidth:1,titleColor:'#1a1a1a',bodyColor:'#6b7280',padding:10,
+  callbacks:{title:i=>dt[i[0].dataIndex].split('-').reverse().join('/'),label:c=>c.dataset.type==='line'?` Media 7gg: ${c.parsed.y} click`:` Giornalieri: ${c.parsed.y} click`}}},
+ scales:{x:{grid:{display:false},ticks:{color:'#9ca3af',font:{size:10},maxRotation:0,autoSkip:false,callback:(v,i)=>labels[i]||null},border:{color:'#e5e7eb'}},
+  y:{min:0,max:1400,grid:{color:'#f3f4f6'},ticks:{color:'#9ca3af',font:{size:11},stepSize:200},border:{display:false}}}}});
+</script>
+</body>
+</html>
